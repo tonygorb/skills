@@ -21,7 +21,6 @@ More ways to install [below](#install).
 
 <table>
   <tr><th colspan="2" align="left">Skill</th><th align="left">What it does</th><th align="left">Claude&nbsp;app</th></tr>
-  <tr><td colspan="4"><b>Explore</b> · before anything is built</td></tr>
   <tr>
     <td width="24"><img src="assets/icons/concept-lab.svg" width="24" height="30" alt=""></td>
     <td><a href="skills/concept-lab/SKILL.md"><b>Concept&nbsp;lab</b></a></td>
@@ -34,7 +33,6 @@ More ways to install [below](#install).
     <td>Audits one part of the code and ranks what to improve. Changes nothing.</td>
     <td><a href="https://github.com/tonygorb/skills/releases/latest/download/evolve.zip">ZIP</a></td>
   </tr>
-  <tr><td colspan="4"><b>Build</b> · inside the system you already have</td></tr>
   <tr>
     <td width="24"><img src="assets/icons/design-within-what-exists.svg" width="24" height="30" alt=""></td>
     <td><a href="skills/design-within-what-exists/SKILL.md"><b>Design&nbsp;within&nbsp;what&nbsp;exists</b></a></td>
@@ -47,7 +45,6 @@ More ways to install [below](#install).
     <td>Finds what makes AI-built UI look generic; fixes it once you approve.</td>
     <td><a href="https://github.com/tonygorb/skills/releases/latest/download/unugly.zip">ZIP</a></td>
   </tr>
-  <tr><td colspan="4"><b>Check</b> · before anyone says it's done</td></tr>
   <tr>
     <td width="24"><img src="assets/icons/review-a-screen.svg" width="24" height="30" alt=""></td>
     <td><a href="skills/review-a-screen/SKILL.md"><b>Review&nbsp;a&nbsp;screen</b></a></td>
@@ -60,14 +57,12 @@ More ways to install [below](#install).
     <td>Proves a change works with real checks: lint, types, tests, screenshots.</td>
     <td><a href="https://github.com/tonygorb/skills/releases/latest/download/verify-work.zip">ZIP</a></td>
   </tr>
-  <tr><td colspan="4"><b>Ship</b> · when the work is done</td></tr>
   <tr>
     <td width="24"><img src="assets/icons/wrap-up.svg" width="24" height="30" alt=""></td>
     <td><a href="skills/wrap-up/SKILL.md"><b>Wrap&nbsp;up</b></a></td>
     <td>Lists the changes, fixes stale docs, runs the checks, drafts the commit. Never commits.</td>
     <td><a href="https://github.com/tonygorb/skills/releases/latest/download/wrap-up.zip">ZIP</a></td>
   </tr>
-  <tr><td colspan="4"><b>Design system</b> · tokens in code, mirrored in Figma</td></tr>
   <tr>
     <td width="24"><img src="assets/icons/token-foundations.svg" width="24" height="30" alt=""></td>
     <td><a href="skills/token-foundations/SKILL.md"><b>Token&nbsp;foundations</b></a></td>
