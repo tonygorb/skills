@@ -1,26 +1,77 @@
 # Skills
 
-Agent skills for design, design systems and shipping work you can trust. Written by
-[Tony Gorb](https://github.com/tonygorb), a product designer, from the way he works with coding agents.
+**A product designer's workflow, as agent skills.**
 
-Each skill is a folder with a `SKILL.md`, in the open [Agent Skills](https://agentskills.io/specification)
-format, so it works in Claude Code, the Claude app, Codex, Cursor, GitHub Copilot, Gemini CLI and
-[other tools that read it](https://agentskills.io/clients).
+Your coding agent shows you options before it builds, looks at the real screen before it says
+done, and keeps code and Figma in step. Ten skills by [Tony Gorb](https://github.com/tonygorb),
+written from how he works with agents every day.
+
+```text
+ EXPLORE           BUILD                CHECK                 SHIP
+┌─────────────┐   ┌────────────────┐   ┌─────────────────┐   ┌─────────┐
+│ concept-lab │─▶ │ design-within- │─▶ │ review-a-screen │─▶ │ wrap-up │
+│ evolve      │   │   what-exists  │   │ verify-work     │   │         │
+│             │   │ unugly         │   │                 │   │         │
+└─────────────┘   └────────────────┘   └─────────────────┘   └─────────┘
+
+ DESIGN SYSTEM
+┌───────────────────┐   ┌──────────────────────┐   ┌─────────────────┐
+│ token-foundations │─▶ │ polish-design-system │─▶ │ tokens-to-figma │
+└───────────────────┘   └──────────────────────┘   └─────────────────┘
+```
+
+```sh
+npx skills add tonygorb/skills
+```
+
+Works in Claude Code, the Claude app, Codex, Cursor, GitHub Copilot, Gemini CLI and
+[other tools that read the open Agent Skills format](https://agentskills.io/clients).
+More ways to install [below](#install).
 
 ## The skills
 
+### Explore
+
+Before anything is built.
+
 | Skill | What it does | Claude app |
 | --- | --- | --- |
-| [`concept-lab`](skills/concept-lab/SKILL.md) | Build 3-5 real concepts side by side and let the user pick one. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/concept-lab.zip) |
-| [`design-within-what-exists`](skills/design-within-what-exists/SKILL.md) | Change a screen with the patterns it already has, not new ones. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/design-within-what-exists.zip) |
-| [`evolve`](skills/evolve/SKILL.md) | Audit one part of the code and rank what to improve. Changes nothing. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/evolve.zip) |
-| [`polish-design-system`](skills/polish-design-system/SKILL.md) | Find hard-coded colours, propose tokens, apply them once approved. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/polish-design-system.zip) |
-| [`review-a-screen`](skills/review-a-screen/SKILL.md) | Check a screen in the browser at real sizes, like a designer would. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/review-a-screen.zip) |
-| [`token-foundations`](skills/token-foundations/SKILL.md) | Build or audit semantic design tokens in OKLCH, light and dark. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/token-foundations.zip) |
-| [`tokens-to-figma`](skills/tokens-to-figma/SKILL.md) | Push a codebase's design tokens into Figma as variables and modes. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/tokens-to-figma.zip) |
-| [`unugly`](skills/unugly/SKILL.md) | Find what makes AI-built UI look generic, fix it once approved. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/unugly.zip) |
-| [`verify-work`](skills/verify-work/SKILL.md) | Prove a change works with real checks before calling it done. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/verify-work.zip) |
-| [`wrap-up`](skills/wrap-up/SKILL.md) | Close a task: list the changes, fix stale docs, run checks, draft the commit. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/wrap-up.zip) |
+| [`concept-lab`](skills/concept-lab/SKILL.md) | Builds 3-5 real concepts side by side; you pick one. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/concept-lab.zip) |
+| [`evolve`](skills/evolve/SKILL.md) | Audits one part of the code and ranks what to improve. Changes nothing. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/evolve.zip) |
+
+### Build
+
+Inside the system you already have.
+
+| Skill | What it does | Claude app |
+| --- | --- | --- |
+| [`design-within-what-exists`](skills/design-within-what-exists/SKILL.md) | Changes a screen with the patterns it already has, not new ones. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/design-within-what-exists.zip) |
+| [`unugly`](skills/unugly/SKILL.md) | Finds what makes AI-built UI look generic; fixes it once you approve. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/unugly.zip) |
+
+### Check
+
+Before anyone says it's done.
+
+| Skill | What it does | Claude app |
+| --- | --- | --- |
+| [`review-a-screen`](skills/review-a-screen/SKILL.md) | Looks at the screen in a browser at laptop and phone size, like a designer would. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/review-a-screen.zip) |
+| [`verify-work`](skills/verify-work/SKILL.md) | Proves a change works with real checks: lint, types, tests, screenshots. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/verify-work.zip) |
+
+### Ship
+
+| Skill | What it does | Claude app |
+| --- | --- | --- |
+| [`wrap-up`](skills/wrap-up/SKILL.md) | Lists the changes, fixes stale docs, runs the checks, drafts the commit. Never commits. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/wrap-up.zip) |
+
+### Design system
+
+Tokens in code, mirrored in Figma.
+
+| Skill | What it does | Claude app |
+| --- | --- | --- |
+| [`token-foundations`](skills/token-foundations/SKILL.md) | Builds or audits semantic tokens in OKLCH, light and dark, with measured contrast. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/token-foundations.zip) |
+| [`polish-design-system`](skills/polish-design-system/SKILL.md) | Finds hard-coded colours, proposes tokens, applies them once you approve. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/polish-design-system.zip) |
+| [`tokens-to-figma`](skills/tokens-to-figma/SKILL.md) | Pushes the code's tokens into Figma as variables with Light and Dark modes. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/tokens-to-figma.zip) |
 
 `tokens-to-figma` needs the [Figma MCP server](https://help.figma.com/hc/en-us/articles/32132100833559) with
 write access. The skills that look at screens (`review-a-screen`, `concept-lab`, `verify-work`,
