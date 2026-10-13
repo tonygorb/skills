@@ -90,25 +90,119 @@ Playwright or Chrome DevTools MCP server.
 
 ## Install
 
-**Claude Code**, as a plugin:
+One line in a terminal installs all ten for the agent you pick. Open yours below.
+
+<details>
+<summary><b>Claude Code</b></summary>
+
+In Claude Code, as a plugin:
 
 ```text
 /plugin marketplace add tonygorb/skills
 /plugin install tonygorb-skills@tonygorb
 ```
 
-**Any agent** (Claude Code, Codex, Cursor, Copilot, Gemini CLI and more), with the open-source
-[`skills`](https://github.com/vercel-labs/skills) CLI. It asks which skills and which agents:
+Or from a terminal:
+
+```sh
+npx skills add tonygorb/skills -g -a claude-code -y
+```
+
+Installs all ten into `~/.claude/skills/`.
+
+</details>
+
+<details>
+<summary><b>Claude app (claude.ai and desktop)</b></summary>
+
+No terminal needed. Download a skill's ZIP from the [table above](#the-skills), then in the app
+open **Customize → Skills** and upload it. One ZIP per skill.
+
+</details>
+
+<details>
+<summary><b>Codex</b></summary>
+
+```sh
+npx skills add tonygorb/skills -g -a codex -y
+```
+
+Installs all ten into `~/.agents/skills/`.
+
+</details>
+
+<details>
+<summary><b>Cursor</b></summary>
+
+```sh
+npx skills add tonygorb/skills -g -a cursor -y
+```
+
+Installs all ten into `~/.agents/skills/`. Cursor reads that folder.
+
+</details>
+
+<details>
+<summary><b>GitHub Copilot</b></summary>
+
+```sh
+npx skills add tonygorb/skills -g -a github-copilot -y
+```
+
+Installs all ten into `~/.agents/skills/`. Copilot reads that folder.
+
+</details>
+
+<details>
+<summary><b>Gemini CLI</b></summary>
+
+```sh
+npx skills add tonygorb/skills -g -a gemini-cli -y
+```
+
+Installs all ten into `~/.agents/skills/`. Gemini CLI reads that folder.
+
+</details>
+
+<details>
+<summary><b>OpenCode</b></summary>
+
+```sh
+npx skills add tonygorb/skills -g -a opencode -y
+```
+
+Installs all ten into `~/.agents/skills/`. OpenCode reads that folder.
+
+</details>
+
+<details>
+<summary><b>Windsurf (Devin Desktop)</b></summary>
+
+```sh
+npx skills add tonygorb/skills -g -a windsurf -y
+```
+
+Installs all ten into `~/.codeium/windsurf/skills/`.
+
+</details>
+
+<details>
+<summary><b>Any other agent</b></summary>
+
+The [`skills`](https://github.com/vercel-labs/skills) CLI knows 70+ agents. Run it without flags and pick
+the skills and agents from a list:
 
 ```sh
 npx skills add tonygorb/skills
 ```
 
-**The Claude app** (claude.ai and desktop): download a skill's ZIP from the table above, then
-upload it under Customize → Skills.
+Or copy a skill's folder by hand into your agent's skills folder: `.claude/skills/` for Claude
+Code, `.agents/skills/` for most others.
 
-**By hand:** copy a skill's folder into `.claude/skills/` (Claude Code) or `.agents/skills/`
-(most other agents).
+</details>
+
+**Tips.** One skill only: add `--skill verify-work`. Just this project instead of everywhere:
+drop `-g`. Get the latest versions later: `npx skills update`.
 
 ## Use
 
@@ -116,7 +210,7 @@ Skills load by themselves when a request matches. Ask the way you normally would
 
 - "Show me three options for the pricing section." → `concept-lab`
 - "Set up design tokens for this app, brand colour #3b5bdb." → `token-foundations`
-- "Sync our tokens to this Figma file: <link>." → `tokens-to-figma`
+- "Sync our tokens to this Figma file" (with the file's link) → `tokens-to-figma`
 - "This looks AI-generated. Make it less generic." → `unugly`
 - "Wrap up." → `wrap-up`
 
