@@ -67,7 +67,8 @@ Explore only when exploring changes the answer.
     it turns out wrong or impossible, say so and ask. Don't quietly redesign it.
 11. **One sample before the rollout.** If the pick applies to many items or screens, build one,
     show it, get a reaction, then roll out. Show each new item before wiring it in.
-12. **Clean up.** Remove the decided round from the lab. Grep for its class prefix and file
+12. **Clean up.** Remove the rejected concepts from the lab; remove the approved one once the human
+    has seen the real build. Grep for its class prefix and file
     names, then run lint, typecheck and build to prove nothing still points at it. Delete only
     your own round.
 

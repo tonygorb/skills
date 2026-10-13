@@ -17,7 +17,7 @@ Audit the tokens, propose, wait for a yes, apply everywhere at once, then update
 
 Two layers. **Primitives** are raw values (`olive-400`, `#7a8a3c`). **Semantic tokens** say what a
 value is for (`text-primary`, `bg-surface`) and point at a primitive. Components use semantic
-tokens only, never primitives and never raw values. The same rule holds in Figma: primitive
+tokens (and component tokens, where a system has them), never primitives and never raw values. The same rule holds in Figma: primitive
 variables hold the raw values, semantic variables alias them, with a Light and a Dark mode.
 
 ## Steps
@@ -27,9 +27,10 @@ variables hold the raw values, semantic variables alias them, with a Light and a
 Search the component code for raw values. For a React and Tailwind project:
 
 ```bash
-grep -rn --include="*.tsx" -E "#([0-9a-fA-F]{3}){1,2}\b" src/       # hex in components
+grep -rn --include="*.tsx" -E "#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})\b" src/  # hex (skip anchors like href="#add")
 grep -rn --include="*.tsx" -E "style=.*(background|color|border)" src/ # inline colour styles
 grep -rn --include="*.tsx" -E "(bg|text|border)-\[" src/              # arbitrary bracket values
+grep -rn --include="*.tsx" -E "\b(bg|text|border|ring|fill|stroke)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-[0-9]{2,3}\b" src/  # raw palette classes
 ```
 
 Record each hit: file, line, value, the token it should be.
@@ -44,7 +45,7 @@ Record each hit: file, line, value, the token it should be.
 ### 3. Propose, then stop
 
 ```
-Audit: <N> hardcoded values in <M> files
+Audit: <N> hard-coded values in <M> files
 Drift from the design file: <list, or "none">
 New primitives: <name> (<value>)
 New semantic tokens: <name> → <primitive>

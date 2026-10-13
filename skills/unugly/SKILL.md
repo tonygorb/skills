@@ -85,20 +85,21 @@ Want variants for any of these?
 
 ### 5. Critique (when asked for a structured review)
 
-Score Nielsen's 10 heuristics from 0 to 4 each (max 40). 0 = no evidence, 1 = severe violation,
-2 = present but weak, 3 = mostly met, 4 = fully met.
+Score Nielsen's 10 heuristics from 0 to 4 each (max 40). 0 = severe violation, 1 = major problems,
+2 = present but weak, 3 = mostly met, 4 = fully met. If the screen gives no way to judge one, score
+it 2 and say so.
 
 | # | Heuristic | Quick check |
 | --- | --- | --- |
 | 1 | Visibility of system status | Loading, progress, success and error feedback |
-| 2 | Match with the real world | Words and icons users know |
+| 2 | Match between the system and the real world | Words and icons users know |
 | 3 | User control and freedom | Undo, back, cancel, dismiss |
 | 4 | Consistency and standards | Same word and colour for the same role |
 | 5 | Error prevention | Confirm destructive actions, constrained inputs |
-| 6 | Recognition over recall | Labels visible without hover, current state shown |
-| 7 | Flexibility and efficiency | Keyboard, shortcuts, progressive disclosure |
+| 6 | Recognition rather than recall | Labels visible without hover, current state shown |
+| 7 | Flexibility and efficiency of use | Keyboard, shortcuts, progressive disclosure |
 | 8 | Aesthetic and minimalist design | Nothing competes with the main content |
-| 9 | Recover from errors | Plain-language errors with a next step |
+| 9 | Help users recognize, diagnose and recover from errors | Plain-language errors with a next step |
 | 10 | Help and documentation | Empty states that guide, contextual help |
 
 Then pass or fail five personas. Pass means they finish the core task without a blocker.

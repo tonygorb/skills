@@ -6,7 +6,7 @@ metadata:
   author: Tony Gorb
   source: https://github.com/tonygorb/skills
   category: design-systems
-  cover: "11 steps"
+  cover: "OKLCH"
 ---
 
 # Token foundations
@@ -70,14 +70,27 @@ never hand-pick eleven colours.
 ```bash
 node -e '
 const [L, C, H] = process.argv[1].split(" ").map(Number); // seed "60 0.18 250"
+function linear(l, c) { // OKLCH (l in %) to linear sRGB (Ottosson)
+  const a = c * Math.cos(H * Math.PI / 180), b = c * Math.sin(H * Math.PI / 180), Lp = l / 100;
+  const x = (Lp + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+  const y = (Lp - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+  const z = (Lp - 0.0894841775 * a - 1.2914855480 * b) ** 3;
+  return [4.0767416621 * x - 3.3077115913 * y + 0.2309699292 * z,
+         -1.2684380046 * x + 2.6097574011 * y - 0.3413193965 * z,
+         -0.0041960863 * x - 0.7034186147 * y + 1.7076147010 * z];
+}
+const inGamut = (l, c) => linear(l, c).every(v => v >= -1e-4 && v <= 1 + 1e-4);
 const steps = [[50,97,.10],[100,94,.18],[200,88,.35],[300,80,.55],[400,70,.80],
                [500,60,1.0],[600,52,.95],[700,44,.85],[800,35,.65],[900,25,.45],[950,16,.30]];
-const out = {};
+const out = {}, clamped = [];
 for (const [step, l, cMul] of steps) {
-  const c = Math.min(C * cMul, 0.37 - 0.0014 * Math.abs(l - 50)); // rough sRGB-safe clamp
+  let c = C * cMul;
+  while (c > 0 && !inGamut(l, c)) c = Math.max(0, c - 0.005); // lower chroma until it fits sRGB
+  if (c < C * cMul) clamped.push(step);
   out[step] = `oklch(${l}% ${c.toFixed(3)} ${H})`;
 }
 console.log(JSON.stringify(out, null, 2));
+console.log("clamped to fit sRGB:", clamped.join(", ") || "none");
 ' "60 0.18 250"
 ```
 
@@ -85,12 +98,13 @@ The scales to make:
 
 - **brand** from the brand seed.
 - **neutral** with the brand hue and chroma at 0.05 times the seed's (tinted), or chroma 0 (pure
-  grey). Add an `850` step between 800 and 900 for raised surfaces in dark mode.
+  grey). Add an `850` step between 800 and 900 for raised surfaces in dark mode, and `0` for pure
+  white (`oklch(100% 0 0)`), so no semantic token has to hold a raw `white`.
 - **accent** from the accent seed, only if there is one.
 - **State scales** at fixed hues, whatever the brand: success 145, warning 75, danger 25, info 240.
   Move info if the brand itself is blue.
 
-If a value had to be clamped to stay in gamut, say so in the report.
+The script prints which steps it had to clamp to stay in sRGB. List them in the report.
 
 ### 4. Set the other primitive scales
 
@@ -123,29 +137,32 @@ Every role below exists, and every colour role has both modes. A good starting m
 |---|---|---|
 | `background` | neutral.50 | neutral.950 |
 | `foreground` | neutral.950 | neutral.50 |
-| `surface.default` | white | neutral.900 |
+| `surface.default` | neutral.0 | neutral.900 |
 | `surface.muted` | neutral.100 | neutral.800 |
-| `surface.elevated` | white | neutral.850 |
+| `surface.elevated` | neutral.0 | neutral.850 |
 | `surface.inverse` | neutral.950 | neutral.50 |
 | `border.default` | neutral.200 | neutral.800 |
-| `border.strong` | neutral.300 | neutral.700 |
+| `border.strong` | neutral.500 | neutral.600 |
 | `border.focus` | brand.500 | brand.400 |
 | `text.primary` | neutral.950 | neutral.50 |
 | `text.secondary` | neutral.700 | neutral.300 |
-| `text.muted` | neutral.500 | neutral.400 |
+| `text.muted` | neutral.600 | neutral.400 |
 | `text.inverse` | neutral.50 | neutral.950 |
 | `action.primary` | brand.600 | brand.500 |
 | `action.primary-hover` | brand.700 | brand.400 |
-| `action.primary-foreground` | white | neutral.950 |
+| `action.primary-foreground` | neutral.0 | neutral.950 |
 | `action.secondary` | neutral.100 | neutral.800 |
 | `action.secondary-hover` | neutral.200 | neutral.700 |
 | `action.secondary-foreground` | neutral.950 | neutral.50 |
 | `action.disabled` | neutral.200 | neutral.800 |
-| `state.{success,warning,danger,info}` | that scale's 500 | that scale's 500 |
-| `state.{role}-foreground` | white or neutral.950, whichever passes contrast | same |
+| `state.{success,warning,danger,info}` | that scale's 600 | that scale's 600 |
+| `state.{role}-foreground` | neutral.0 | neutral.0 |
 
 Add `accent` and `accent-foreground` only if there is an accent seed. `accent` is never the
 primary call to action: that is `action.primary`.
+
+`border.default` is for dividers and card edges, which are decorative; `border.strong` is for
+input and control outlines, which must reach 3:1.
 
 State colours mean system state only, never decoration, and always come with an icon or text.
 
@@ -183,10 +200,12 @@ Naming: dot notation in JSON (`action.primary`), kebab-case as CSS variables
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
-:root { color-scheme: light dark; }
+:root { color-scheme: light dark; }   /* follows the system when no theme is forced */
+:root.dark, :root[data-theme="dark"] { color-scheme: dark; }
+:root.light, :root[data-theme="light"] { color-scheme: light; }
 ```
 
 Match the dark switch to the one the project already uses. Wrap the generated block in marker
@@ -234,19 +253,19 @@ Pairs to check, light and dark:
 |---|---|
 | `text.primary` on `background`, `surface.default`, `surface.muted` | 4.5 |
 | `text.secondary` on `background` | 4.5 |
-| `text.muted` on `background` | 3 (warn below 4.5) |
+| `text.muted` on `background` | 4.5 (3 only if it is never used below 24px, or 18.66px bold) |
 | `action.primary-foreground` on `action.primary` | 4.5 |
 | `action.secondary-foreground` on `action.secondary` | 4.5 |
 | `state.{role}-foreground` on `state.{role}` | 4.5 |
-| `border.default` on `background` | 3 |
+| `border.strong` on `background` | 3 |
 | `border.focus` on `background` | 3 |
 
 To fix a failure, move the semantic role one primitive step (for example `text.muted` light from
-neutral.500 to neutral.600). Never retune the primitive scale by hand to rescue one pair.
+neutral.600 to neutral.700). Never retune the primitive scale by hand to rescue one pair.
 
 **Score** each area 1 to 10:
 
-- **Tokens:** all colour in OKLCH, full eleven-step scales, constant hue per scale, no page tokens,
+- **Tokens:** all colour in OKLCH, eleven steps per scale (neutral adds 0 and 850), constant hue per scale, no page tokens,
   the non-colour families present.
 - **Semantic layer:** every required role, both modes for every colour role, semantic values
   point at primitives instead of holding raw values.

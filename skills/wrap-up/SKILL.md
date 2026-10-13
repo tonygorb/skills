@@ -17,7 +17,8 @@ The end-of-task pass: changes, docs, build, tests, a drafted commit. **Never com
 
 ### 1. Inventory the changes
 
-Run `git status` and `git diff --stat HEAD`. List new, modified and deleted files.
+Run `git status` and `git diff --stat HEAD` (in a repo with no commits yet, `git status` alone).
+List new, modified and deleted files.
 Nothing changed: stop and say "nothing to wrap up".
 
 ### 2. Check the scope

@@ -25,7 +25,9 @@ Check all of these first. If one is missing, say what and stop.
    every session. Skipping it causes failures that are hard to trace.
 3. **A Figma file URL with edit access.** This skill writes into an existing file; it doesn't
    create one. With some setups the file must also be open in the Figma desktop app.
-4. **Tokens in the code**, readable: a tokens JSON file, a Tailwind v4 `@theme` block, or `:root`
+4. **A Figma plan with variable modes** (Professional or above). Starter files can't add a Dark
+   mode, so `02 Semantic` can't hold Light and Dark there. On Starter, say so and stop.
+5. **Tokens in the code**, readable: a tokens JSON file, a Tailwind v4 `@theme` block, or `:root`
    and dark-mode custom properties. Ideally already split into primitives and semantic tokens
    (see `token-foundations`).
 
@@ -115,7 +117,7 @@ Figma stores colour as sRGB from 0 to 1, so convert each OKLCH value inside the 
 runtime has no colour library; ship the conversion inline:
 
 ```js
-function oklchToRgb(L, C, H) { // L in %, returns Figma {r, g, b, a}
+function oklchToRgb(L, C, H) { // L in %, returns Figma {r, g, b, a} plus clamped: true if out of sRGB
   const Lp = L / 100, a = C * Math.cos(H * Math.PI / 180), b = C * Math.sin(H * Math.PI / 180);
   const l = (Lp + 0.3963377774 * a + 0.2158037573 * b) ** 3;
   const m = (Lp - 0.1055613458 * a - 0.0638541728 * b) ** 3;
@@ -124,12 +126,14 @@ function oklchToRgb(L, C, H) { // L in %, returns Figma {r, g, b, a}
               -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
               -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s];
   const enc = v => v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055;
+  const clamped = lin.some(v => v < -1e-4 || v > 1 + 1e-4);
   const [r, g, bl] = lin.map(v => Math.max(0, Math.min(1, enc(v))));
-  return { r, g, b: bl, a: 1 };
+  return { r, g, b: bl, a: 1, clamped };
 }
 ```
 
-A value that clamps was outside sRGB. List it in the report.
+Pass Figma only `{ r, g, b, a }`. Where `clamped` is true, the value was outside sRGB: list it in
+the report.
 
 Find or create by name, never blindly create:
 
@@ -141,7 +145,8 @@ const vars = await figma.variables.getLocalVariablesAsync("COLOR");
 const find = name => vars.find(v => v.name === name && v.variableCollectionId === brand.id);
 
 const v = find("Color/Brand/500") ?? figma.variables.createVariable("Color/Brand/500", brand, "COLOR");
-v.setValueForMode(brand.defaultModeId, oklchToRgb(60, 0.18, 250));
+const { clamped, ...rgba } = oklchToRgb(60, 0.18, 250);
+v.setValueForMode(brand.defaultModeId, rgba);
 v.scopes = ["FRAME_FILL", "SHAPE_FILL", "TEXT_FILL", "STROKE_COLOR", "EFFECT_COLOR"];
 ```
 

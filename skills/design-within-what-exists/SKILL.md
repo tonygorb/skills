@@ -18,7 +18,8 @@ Read what's already there, reuse it, and only then design what's missing.
 1. Open the live screen first, at the size where it's used most.
 2. List what it already uses: buttons, spacing, type, colours, empty and error states.
 3. Reuse before you invent. If something new is needed, name it and say why.
-4. Show one or two options and let the user pick before building.
+4. Show one or two options and let the user pick before building. If the structure itself needs
+   rethinking, run `concept-lab` instead.
 5. Build only the option that was picked.
 
 ## Before it's done
