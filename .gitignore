@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+# Drafts stay on this machine until approved: a public repo must not carry them.
+drafts/*
+!drafts/README.md
