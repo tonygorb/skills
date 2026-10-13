@@ -1,24 +1,13 @@
-# Skills
+<p align="center">
+  <img src="assets/hero.png" alt="Agent Skills: the skills I use to design and ship with Claude, Codex and Cursor." width="100%">
+</p>
 
-**A product designer's workflow, as agent skills.**
-
-Your coding agent shows you options before it builds, looks at the real screen before it says
-done, and keeps code and Figma in step. Ten skills by [Tony Gorb](https://github.com/tonygorb),
-written from how he works with agents every day.
-
-```text
- EXPLORE           BUILD                CHECK                 SHIP
-┌─────────────┐   ┌────────────────┐   ┌─────────────────┐   ┌─────────┐
-│ concept-lab │─▶ │ design-within- │─▶ │ review-a-screen │─▶ │ wrap-up │
-│ evolve      │   │   what-exists  │   │ verify-work     │   │         │
-│             │   │ unugly         │   │                 │   │         │
-└─────────────┘   └────────────────┘   └─────────────────┘   └─────────┘
-
- DESIGN SYSTEM
-┌───────────────────┐   ┌──────────────────────┐   ┌─────────────────┐
-│ token-foundations │─▶ │ polish-design-system │─▶ │ tokens-to-figma │
-└───────────────────┘   └──────────────────────┘   └─────────────────┘
-```
+<p align="center">
+  <strong>A product designer's workflow, as agent skills.</strong><br>
+  I'm <a href="https://github.com/tonygorb">Tony Gorb</a>, a product designer. With these ten skills my coding agent
+  shows me options before it builds, looks at the real screen before it says done, and keeps code
+  and Figma in step.
+</p>
 
 ```sh
 npx skills add tonygorb/skills
@@ -30,48 +19,35 @@ More ways to install [below](#install).
 
 ## The skills
 
-### Explore
+### Explore · before anything is built
 
-Before anything is built.
+<p><img src="assets/icons/concept-lab.svg" width="48" height="48" alt="" align="left"><a href="skills/concept-lab/SKILL.md"><b>Concept lab</b></a><br>Builds 3-5 real concepts side by side; you pick one.</p>
 
-| Skill | What it does | Claude app |
-| --- | --- | --- |
-| [`concept-lab`](skills/concept-lab/SKILL.md) | Builds 3-5 real concepts side by side; you pick one. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/concept-lab.zip) |
-| [`evolve`](skills/evolve/SKILL.md) | Audits one part of the code and ranks what to improve. Changes nothing. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/evolve.zip) |
+<p><img src="assets/icons/evolve.svg" width="48" height="48" alt="" align="left"><a href="skills/evolve/SKILL.md"><b>Evolve</b></a><br>Audits one part of the code and ranks what to improve. Changes nothing.</p>
 
-### Build
+### Build · inside the system you already have
 
-Inside the system you already have.
+<p><img src="assets/icons/design-within-what-exists.svg" width="48" height="48" alt="" align="left"><a href="skills/design-within-what-exists/SKILL.md"><b>Design within what exists</b></a><br>Changes a screen with the patterns it already has, not new ones.</p>
 
-| Skill | What it does | Claude app |
-| --- | --- | --- |
-| [`design-within-what-exists`](skills/design-within-what-exists/SKILL.md) | Changes a screen with the patterns it already has, not new ones. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/design-within-what-exists.zip) |
-| [`unugly`](skills/unugly/SKILL.md) | Finds what makes AI-built UI look generic; fixes it once you approve. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/unugly.zip) |
+<p><img src="assets/icons/unugly.svg" width="48" height="48" alt="" align="left"><a href="skills/unugly/SKILL.md"><b>Unugly</b></a><br>Finds what makes AI-built UI look generic; fixes it once you approve.</p>
 
-### Check
+### Check · before anyone says it's done
 
-Before anyone says it's done.
+<p><img src="assets/icons/review-a-screen.svg" width="48" height="48" alt="" align="left"><a href="skills/review-a-screen/SKILL.md"><b>Review a screen</b></a><br>Looks at the screen in a browser at laptop and phone size, like a designer would.</p>
 
-| Skill | What it does | Claude app |
-| --- | --- | --- |
-| [`review-a-screen`](skills/review-a-screen/SKILL.md) | Looks at the screen in a browser at laptop and phone size, like a designer would. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/review-a-screen.zip) |
-| [`verify-work`](skills/verify-work/SKILL.md) | Proves a change works with real checks: lint, types, tests, screenshots. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/verify-work.zip) |
+<p><img src="assets/icons/verify-work.svg" width="48" height="48" alt="" align="left"><a href="skills/verify-work/SKILL.md"><b>Verify work</b></a><br>Proves a change works with real checks: lint, types, tests, screenshots.</p>
 
-### Ship
+### Ship · when the work is done
 
-| Skill | What it does | Claude app |
-| --- | --- | --- |
-| [`wrap-up`](skills/wrap-up/SKILL.md) | Lists the changes, fixes stale docs, runs the checks, drafts the commit. Never commits. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/wrap-up.zip) |
+<p><img src="assets/icons/wrap-up.svg" width="48" height="48" alt="" align="left"><a href="skills/wrap-up/SKILL.md"><b>Wrap up</b></a><br>Lists the changes, fixes stale docs, runs the checks, drafts the commit. Never commits.</p>
 
-### Design system
+### Design system · tokens in code, mirrored in Figma
 
-Tokens in code, mirrored in Figma.
+<p><img src="assets/icons/token-foundations.svg" width="48" height="48" alt="" align="left"><a href="skills/token-foundations/SKILL.md"><b>Token foundations</b></a><br>Builds or audits semantic tokens in OKLCH, light and dark, with measured contrast.</p>
 
-| Skill | What it does | Claude app |
-| --- | --- | --- |
-| [`token-foundations`](skills/token-foundations/SKILL.md) | Builds or audits semantic tokens in OKLCH, light and dark, with measured contrast. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/token-foundations.zip) |
-| [`polish-design-system`](skills/polish-design-system/SKILL.md) | Finds hard-coded colours, proposes tokens, applies them once you approve. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/polish-design-system.zip) |
-| [`tokens-to-figma`](skills/tokens-to-figma/SKILL.md) | Pushes the code's tokens into Figma as variables with Light and Dark modes. | [ZIP](https://github.com/tonygorb/skills/releases/latest/download/tokens-to-figma.zip) |
+<p><img src="assets/icons/polish-design-system.svg" width="48" height="48" alt="" align="left"><a href="skills/polish-design-system/SKILL.md"><b>Polish a design system</b></a><br>Finds hard-coded colours, proposes tokens, applies them once you approve.</p>
+
+<p><img src="assets/icons/tokens-to-figma.svg" width="48" height="48" alt="" align="left"><a href="skills/tokens-to-figma/SKILL.md"><b>Tokens to Figma</b></a><br>Pushes the code's tokens into Figma as variables with Light and Dark modes.</p>
 
 `tokens-to-figma` needs the [Figma MCP server](https://help.figma.com/hc/en-us/articles/32132100833559) with
 write access. The skills that look at screens (`review-a-screen`, `concept-lab`, `verify-work`,
@@ -94,8 +70,9 @@ Playwright or Chrome DevTools MCP server.
 npx skills add tonygorb/skills
 ```
 
-**The Claude app** (claude.ai and desktop): download a skill's ZIP from the table above, then
-upload it under Customize → Skills.
+**The Claude app** (claude.ai and desktop): download a skill's ZIP from the
+[latest release](https://github.com/tonygorb/skills/releases/latest), then upload it under
+Customize → Skills.
 
 **By hand:** copy a skill's folder into `.claude/skills/` (Claude Code) or `.agents/skills/`
 (most other agents).
