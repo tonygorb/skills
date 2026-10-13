@@ -1,0 +1,35 @@
+{
+  "name": "tonygorb",
+  "owner": {
+    "name": "Tony Gorb",
+    "url": "https://github.com/tonygorb"
+  },
+  "metadata": {
+    "description": "Agent skills for design, design systems and verified delivery, by Tony Gorb.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "tonygorb-skills",
+      "description": "Ten skills for design, design systems and verified delivery: concept rounds, token foundations, Figma variables, screen reviews, verification and wrap-up.",
+      "source": "./",
+      "strict": false,
+      "author": { "name": "Tony Gorb", "url": "https://github.com/tonygorb" },
+      "homepage": "https://github.com/tonygorb/skills",
+      "repository": "https://github.com/tonygorb/skills",
+      "keywords": ["design", "design-systems", "figma", "tokens", "workflow"],
+      "skills": [
+        "./skills/concept-lab",
+        "./skills/design-within-what-exists",
+        "./skills/evolve",
+        "./skills/polish-design-system",
+        "./skills/review-a-screen",
+        "./skills/token-foundations",
+        "./skills/tokens-to-figma",
+        "./skills/unugly",
+        "./skills/verify-work",
+        "./skills/wrap-up"
+      ]
+    }
+  ]
+}

@@ -100,6 +100,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     .map((f) => join(DIR, f))
     .filter((f) => statSync(f).isDirectory());
   const errors = folders.flatMap(check);
+  // The Claude Code marketplace lists the skills by hand; keep it in step with the folders.
+  const listed = JSON.parse(readFileSync(join(ROOT, ".claude-plugin/marketplace.json"), "utf8"))
+    .plugins.flatMap((p) => p.skills.map((s) => s.replace("./skills/", "")));
+  const names = folders.map((f) => f.split("/").pop());
+  for (const n of names.filter((n) => !listed.includes(n)))
+    errors.push(`${n}: missing from .claude-plugin/marketplace.json`);
+  for (const n of listed.filter((n) => !names.includes(n)))
+    errors.push(`${n}: in .claude-plugin/marketplace.json but has no folder`);
   for (const e of errors) console.error(`✗ ${e}`);
   console.log(
     errors.length
